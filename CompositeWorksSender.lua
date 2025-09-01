@@ -4,6 +4,7 @@
 ticks = 0
 ticksToPost = 60 // property.getNumber("frequency")
 port = math.floor(property.getNumber("port"))
+id = property.getText("ID")
 
 local f = false
 compositeNumber = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
@@ -37,7 +38,7 @@ function onTick()
 			end
 		end
 		
-		async.httpGet(port, "/postComposite?n="..n.."&b="..b)
+		async.httpGet(port, "/postComposite?id="..id.."&n="..n.."&b="..b)
 	end
 
 	output.setBool(1, response)

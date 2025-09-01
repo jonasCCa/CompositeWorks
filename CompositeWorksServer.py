@@ -6,30 +6,49 @@ from flask import request
 
 app = Flask(__name__)
 
-compositeNumbers = [0] * 32
-compositeBools   = ['0'] * 32
+compositeTable = {}
 
 @app.route("/postComposite")
 def postComposite():
-    if 'n' in request.args and 'b' in request.args:
+    if 'n' in request.args and 'b' in request.args and 'id' in request.args:
+        compositeNumber = [0] * 32
+        compositeBool   = ['0'] * 32
 
         numbers = request.args.get('n').split(',')
         bools = request.args.get('b').split(',')
         for i in range(32):
-            compositeNumbers[i] = float(numbers[i])
-            compositeBools[i] = bools[i]
+            compositeNumber[i] = float(numbers[i])
+            compositeBool[i] = bools[i]
+        
+        compositeTable.update({request.args.get('id') : {'number': compositeNumber, 'bool': compositeBool}})
         
         return "OK", 200
     else:
-        return "Bad Request", 400
+        return "Unprocessable Content", 422
     
 @app.route("/getComposite")
 def getComposite():
     responseN = ""
     responseB = ""
+    responseCode = 0
     
+    compositeNumber = None
+    compositeBool   = None
+    
+    if not ('id' in request.args):
+        responseCode = 422
+    else:
+        if request.args.get('id') in compositeTable:
+            compositeNumber = compositeTable[request.args.get('id')]['number']
+            compositeBool = compositeTable[request.args.get('id')]['bool']
+            responseCode = 200
+        else:
+            compositeNumber = [0] * 32
+            compositeBool   = ['0'] * 32
+            responseCode = 404
+        
     for i in range(32):
-        responseN += str(compositeNumbers[i]) + ","
-        responseB += compositeBools[i]
-    
-    return responseN + responseB, 200
+        responseN += str(compositeNumber[i]) + ","
+        responseB += compositeBool[i]
+        
+    return responseN + responseB, responseCode

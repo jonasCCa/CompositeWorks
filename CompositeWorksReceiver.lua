@@ -4,6 +4,7 @@
 ticks = 0
 ticksToPost = 60 // property.getNumber("frequency")
 port = math.floor(property.getNumber("port"))
+id = property.getText("ID")
 
 local f = false
 compositeNumber = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
@@ -14,7 +15,7 @@ function onTick()
 	
 	if ticks >= ticksToPost then
 		ticks = 0
-		async.httpGet(port, "/getComposite")
+		async.httpGet(port, "/getComposite?id="..id)
 	end
 	
 	for i = 1, 32 do
