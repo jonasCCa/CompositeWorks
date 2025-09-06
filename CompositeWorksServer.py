@@ -43,10 +43,12 @@ def getComposite():
             compositeBool = compositeTable[request.args.get('id')]['bool']
             responseCode = 200
         else:
-            compositeNumber = [0] * 32
-            compositeBool   = ['0'] * 32
             responseCode = 404
         
+    if responseCode != 200 then:
+        compositeNumber = [0] * 32
+        compositeBool   = ['0'] * 32
+
     for i in range(32):
         responseN += str(compositeNumber[i]) + ","
         responseB += compositeBool[i]
