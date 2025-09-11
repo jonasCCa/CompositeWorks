@@ -45,7 +45,7 @@ def getComposite():
         else:
             responseCode = 404
         
-    if responseCode != 200 then:
+    if responseCode != 200:
         compositeNumber = [0] * 32
         compositeBool   = ['0'] * 32
 
