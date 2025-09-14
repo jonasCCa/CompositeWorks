@@ -1,6 +1,7 @@
 # CompositeWorks
 CompositeWorks is a simple set of two Lua scripts and a Python one that work in tandem in order to achieve a universal way to send and receive Composite data over HTTP in [Stormworks: Build and Rescue](https://store.steampowered.com/app/573090/Stormworks_Build_and_Rescue/).\
 Pre-built Microcontrollers can be found at [Releases](https://github.com/jonasCCa/CompositeWorks/releases).
+A pre-built sample vehicle can be found at the [Workshot page](https://steamcommunity.com/sharedfiles/filedetails/?id=3568139215).
 
 ### If you only care about setting it up, jump to [How To Set Up](#how-to-set-up).
 
